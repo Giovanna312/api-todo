@@ -55,4 +55,15 @@ class TaskController extends Controller
             'message' => 'Tarefa removida com sucesso!'
         ], 200);
     }
+
+    public function complete(Task $task)
+    {
+        $task->completed = true;
+
+        $task->save();
+
+        return (new TaskResource($task))
+            ->additional(['message' => 'Tarefa marcada como concluída!']);
+    }
+
 }
